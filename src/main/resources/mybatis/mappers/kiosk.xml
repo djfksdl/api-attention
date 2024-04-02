@@ -2,26 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kiosk">
 	<!-- 전체 리스트 -->
-	<select id="selectList" resultType="com.javaex.vo.AttentionVo">
+	<select id="selectList" parameterType="String" resultType="com.javaex.vo.AttentionVo">
 		<![CDATA[
 			select 	no
 					,name 
 					,save_name
 			        ,price 
-			from product p join images i
-			where p.no = i.product_no
+			from product p left join images i
+			on p.no = i.product_no
+			where category=#{category}
 		]]>
 	</select>
 	
 	<!-- no로 정보 가져오기 -->
 	<select id="selectByNo" parameterType="int" resultType="com.javaex.vo.AttentionVo">
 		<![CDATA[
-			select  name 
-					,count
+			select  no
+					,name 
 			        ,price
-			from product join cart
+			from product 
 			where no=#{no}
 		]]>
 	
 	</select>
+	
 </mapper>

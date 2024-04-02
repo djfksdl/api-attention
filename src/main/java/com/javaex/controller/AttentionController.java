@@ -3,7 +3,9 @@ package com.javaex.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,25 +21,44 @@ public class AttentionController {
 	
 	//메뉴 리스트 불러오기
 	@GetMapping("/attention")
-	public JsonResult getList() {
+	public JsonResult getList(@RequestParam(value="category") String category) {
 		System.out.println("AttentionController.getList");
 		
-		List<AttentionVo> productList = attentionService.exeList();
+		System.out.println(category);
+		List<AttentionVo> productList = attentionService.exeList(category);
 		System.out.println(productList);
+		
+		//만약 이미지 없는게 있으면 기본 이미지 넣기
+		for (int i = 0; i < productList.size(); i++) {
+			if (productList.get(i).getSave_name() == null) {
+				productList.get(i).setSave_name("coffee01.jpg");
+			}
+		}
 		
 		return JsonResult.success(productList);
 	}
 	
 	//이미지 눌렀을때 no값으로 데이터 가져와서 장바구니에 넣기
 	@GetMapping("/attention/cart")
-	public JsonResult chartList(@RequestParam(value="no")int no) {
-		System.out.println("AttentionController.chartList");
+	public JsonResult cartList(@RequestParam(value="no")int no) {
+		System.out.println("AttentionController.cartList");
 		
 		AttentionVo attentionVo = attentionService.exeCart(no);
 		
 		System.out.println(attentionVo);
 		
 		return JsonResult.success(attentionVo);
+	}
+	
+	//삭제하기
+	@DeleteMapping("/attention/delete")
+	public JsonResult delete(@RequestParam(value="no")int no) {
+		System.out.println("AttentionController.delete");
+		
+		attentionService.exeRemove(no);
+		
+		
+		return null;
 	}
 
 }

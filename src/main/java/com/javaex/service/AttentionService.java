@@ -15,10 +15,11 @@ public class AttentionService {
 	private AttentionDao attentionDao;
 	
 	//리스트 불러오기
-	public List<AttentionVo> exeList() {
+	public List<AttentionVo> exeList(String category) {
 		System.out.println("AttentionService.exeList");
 		
-		List<AttentionVo> productList = attentionDao.selectList();
+		List<AttentionVo> productList = attentionDao.selectList(category);
+		
 		
 		return productList;
 	}
@@ -30,5 +31,13 @@ public class AttentionService {
 		AttentionVo attentionVo = attentionDao.selectOneByNo(no);
 		
 		return attentionVo;
+	}
+	
+	//삭제
+	public int exeRemove(int no) {
+		System.out.println("AttentionService.exeRemove");
+		
+		int count =attentionDao.delete(no);
+		return count;
 	}
 }
