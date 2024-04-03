@@ -31,7 +31,7 @@ public class AttentionController {
 		//만약 이미지 없는게 있으면 기본 이미지 넣기
 		for (int i = 0; i < productList.size(); i++) {
 			if (productList.get(i).getSave_name() == null) {
-				productList.get(i).setSave_name("coffee01.jpg");
+				productList.get(i).setSave_name("imgReady.png");
 			}
 		}
 		
