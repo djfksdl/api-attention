@@ -20,7 +20,7 @@ public class AttentionController {
 	private AttentionService attentionService;
 	
 	//메뉴 리스트 불러오기
-	@GetMapping("/attention")
+	@GetMapping("/attention/mainmenu")
 	public JsonResult getList(@RequestParam(value="category") String category) {
 		System.out.println("AttentionController.getList");
 		
@@ -39,7 +39,7 @@ public class AttentionController {
 	}
 	
 	//이미지 눌렀을때 no값으로 데이터 가져와서 장바구니에 넣기
-	@GetMapping("/attention/cart")
+	@GetMapping("/attention/mainmenu/cart")
 	public JsonResult cartList(@RequestParam(value="no")int no) {
 		System.out.println("AttentionController.cartList");
 		
@@ -51,7 +51,7 @@ public class AttentionController {
 	}
 	
 	//삭제하기
-	@DeleteMapping("/attention/delete")
+	@DeleteMapping("/attention/mainmenu/delete")
 	public JsonResult delete(@RequestParam(value="no")int no) {
 		System.out.println("AttentionController.delete");
 		
