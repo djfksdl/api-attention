@@ -8,6 +8,7 @@ public class ApiAttentionApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiAttentionApplication.class, args);
+		
 	}
 
 }
